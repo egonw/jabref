@@ -1,0 +1,39 @@
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "idea"
+apply plugin: "application"
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+
+	// jgoodies
+	compile 'com.jgoodies:jgoodies-common:1.4.0'
+	compile 'com.jgoodies:jgoodies-forms:1.6.0'
+	compile 'com.jgoodies:jgoodies-looks:2.5.2'
+
+    compile 'org.apache.pdfbox:pdfbox:1.7.1'
+    compile 'org.apache.pdfbox:fontbox:1.7.1'
+    compile 'org.apache.pdfbox:jempbox:1.7.1'
+
+
+    compile 'org.openoffice:juh:3.2.1'
+    compile 'org.openoffice:jurt:3.2.1'
+    compile 'org.openoffice:ridl:3.2.1'
+    compile 'org.openoffice:unoil:3.2.1'
+
+    compile 'org.antlr:antlr:3.4'
+
+    compile 'mysql:mysql-connector-java:5.0.7'
+    compile 'org.postgresql:postgresql:9.2-1002-jdbc4'
+
+    compile fileTree(dir: 'lib', includes: ['*.jar'])
+    	testCompile 'junit:junit:3.8.2' // 'junit:junit:4.11'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}

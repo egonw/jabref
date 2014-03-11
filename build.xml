@@ -1,33 +1,4 @@
 <?xml version="1.0"?>
-<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-   Filename: build.xml
-   Purpose:  Ant build file for Jabref.
-
-             Ant-Download: http://jakarta.apache.org/ant
-             Ant-Manual:   http://jakarta.apache.org/ant/manual/index.html
-
-             Jabref homepage:       http://jabref.sourceforge.net
-             Jabref@SourceForge:    http://sourceforge.net/projects/jabref
-             Jabref@FreeCode:       http://apps.freecode.com/projects/jabref
-             Jabref@Ohloh:          https://www.ohloh.net/p/jabref
-             Jabref git repository: git://jabref.git.sourceforge.net/gitroot/jabref/jabref
-
-             Further questions:
-               help mailing list:   https://lists.sourceforge.net/lists/listinfo/jabref-users
-
-   Precondition: 1. Ant should be installed.
-                 2. JAVA_HOME environment variable contains the path to JDK1.6 or higher
-                 3. ANT_HOME environment variable contains the path to ant's home directory
-
-   Language: XML
-   Compiler: Ant
-   Authors:  Joerg K. Wegner, wegnerj@informatik.uni-tuebingen.de
-             Morten O. Alver
-
-   modified: see at git checkout and "gitk build.xml"
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-
 <project name="JabRef" default="jars" basedir=".">
 
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -597,7 +568,7 @@ version=${jabref.version}</echo>
 
 	<target name="test" depends="buildtest" description="Runs all unit tests">
 		<java fork="yes" classname="junit.textui.TestRunner" failonerror="true">
-			<arg value="tests.net.sf.jabref.AllTests" />
+			<arg value="AllTests" />
 			<classpath refid="classpathTest" />
 		</java>
 	</target>
