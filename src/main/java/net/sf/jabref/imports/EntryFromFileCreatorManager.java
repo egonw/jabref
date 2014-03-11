@@ -33,8 +33,7 @@ public final class EntryFromFileCreatorManager {
 	public EntryFromFileCreatorManager() {
 		
 		entryCreators = new ArrayList<EntryFromFileCreator>(10);
-		entryCreators.add(new EntryFromPDFCreator());
-		
+
 		// add a creator for each ExternalFileType if there is no specialised
 		// creator existing.
         ExternalFileType[] fileTypes = JabRefPreferences.getInstance().getExternalFileTypeSelection();

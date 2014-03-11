@@ -31,7 +31,8 @@ dependencies {
     compile 'org.postgresql:postgresql:9.2-1002-jdbc4'
 
     compile fileTree(dir: 'lib', includes: ['*.jar'])
-    	testCompile 'junit:junit:3.8.2' // 'junit:junit:4.11'
+
+    testCompile 'junit:junit:3.8.2'
 }
 
 task wrapper(type: Wrapper) {

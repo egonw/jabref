@@ -65,10 +65,6 @@ import net.sf.jabref.label.IncollectionLabelRule;
 import net.sf.jabref.label.InproceedingsLabelRule;
 import net.sf.jabref.label.LabelMaker;
 import net.sf.jabref.oo.OpenOfficePanel;
-import net.sf.jabref.plugin.PluginCore;
-import net.sf.jabref.plugin.PluginInstallerAction;
-import net.sf.jabref.plugin.core.JabRefPlugin;
-import net.sf.jabref.plugin.core.generated._JabRefPlugin.EntryFetcherExtension;
 import net.sf.jabref.specialfields.Priority;
 import net.sf.jabref.specialfields.Quality;
 import net.sf.jabref.specialfields.Rank;
@@ -367,7 +363,6 @@ public class JabRefFrame extends JFrame implements OutputPrinter {
     //        Globals.lang("Follow DOI or URL link and try to locate PDF full text document")),
     increaseFontSize = new IncreaseTableFontSizeAction(),
     decreseFontSize = new DecreaseTableFontSizeAction(),
-    installPlugin = new PluginInstallerAction(this),
     resolveDuplicateKeys = new GeneralAction("resolveDuplicateKeys", "Resolve duplicate BibTeX keys",
               Globals.lang("Find and remove duplicate BibTeX keys"),
               prefs.getKey("Resolve duplicate BibTeX keys"));
@@ -592,24 +587,6 @@ public class JabRefFrame extends JFrame implements OutputPrinter {
         Globals.sidePaneManager = this.sidePaneManager;
         Globals.helpDiag = this.helpDiag;
 
-        /*
-         * Load fetchers that are plug-in extensions
-         */
-        JabRefPlugin jabrefPlugin = JabRefPlugin.getInstance(PluginCore.getManager());
-    	if (jabrefPlugin != null){
-                for (EntryFetcherExtension ext : jabrefPlugin.getEntryFetcherExtensions()){
-                    try {
-                            EntryFetcher fetcher = ext.getEntryFetcher();
-                            if (fetcher != null){
-                                    fetchers.add(fetcher);
-                            }
-                    } catch (ClassCastException ex) {
-                        PluginCore.getManager().disablePlugin(ext.getDeclaringPlugin().getDescriptor());
-                        ex.printStackTrace();
-                    }
-                } 
-    	}
-        
         groupSelector = new GroupSelector(this, sidePaneManager);
         searchManager = new SearchManager2(this, sidePaneManager);
 
@@ -1463,8 +1440,6 @@ public JabRefPreferences prefs() {
        }
       }
       });*/
-
-      pluginMenu.add(installPlugin);
 
       //pluginMenu.setEnabled(false);
       mb.add(pluginMenu);

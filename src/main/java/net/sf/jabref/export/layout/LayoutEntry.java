@@ -25,9 +25,6 @@ import java.util.regex.Matcher;
 import net.sf.jabref.*;
 import net.sf.jabref.export.layout.format.plugin.NameFormat;
 import net.sf.jabref.export.layout.format.NotFoundFormatter;
-import net.sf.jabref.plugin.PluginCore;
-import net.sf.jabref.plugin.core.JabRefPlugin;
-import net.sf.jabref.plugin.core.generated._JabRefPlugin.LayoutFormatterExtension;
 
 /**
  * DOCUMENT ME!
@@ -377,19 +374,6 @@ public class LayoutEntry {
 	public static LayoutFormatter getLayoutFormatterFromPlugins(String formatterName){
 		if (pluginLayoutFormatter == null){
 			pluginLayoutFormatter = new HashMap<String, LayoutFormatter>();
-            JabRefPlugin plugin = JabRefPlugin.getInstance(PluginCore.getManager());
-			if (plugin != null){
-				for (LayoutFormatterExtension e : plugin.getLayoutFormatterExtensions()){
-					LayoutFormatter formatter = e.getLayoutFormatter();
-					String name = e.getName();
-					if (name == null)
-						name = e.getId();
-					
-					if (formatter != null){
-						pluginLayoutFormatter.put(name, formatter);
-					}
-				}
-			}
 		}
         // We need to make a new instance of this LayoutFormatter, in case it is a
         // parameter-accepting layout formatter:

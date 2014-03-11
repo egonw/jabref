@@ -23,7 +23,6 @@ import net.sf.jabref.external.ExternalFileType;
 import net.sf.jabref.gui.FileListEntry;
 import net.sf.jabref.gui.FileListTableModel;
 import net.sf.jabref.imports.BibtexParser;
-import net.sf.jabref.imports.EntryFromPDFCreator;
 import net.sf.jabref.imports.ParserResult;
 import net.sf.jabref.imports.UnlinkedFilesCrawler;
 
@@ -100,25 +99,6 @@ public class DatabaseFileLookupTest extends TestCase {
 		// #################### SETUP END ##################### //
 		
 		UnlinkedFilesCrawler crawler = new UnlinkedFilesCrawler(database);
-		CheckableTreeNode treeNode = crawler.searchDirectory(pdfDirectory, new EntryFromPDFCreator());
-		
-		assertNotNull(treeNode);
-		
-
-		/**
-		 * Select all nodes manually.
-		 */
-		Enumeration enumeration = treeNode.breadthFirstEnumeration();
-		while(enumeration.hasMoreElements()) {
-			CheckableTreeNode nextElement = (CheckableTreeNode) enumeration.nextElement();
-			nextElement.setSelected(true);
-		}
-		
-		List<File> resultList = getFileListFromNode(treeNode);
-		
-		assertFalse(resultList.isEmpty());
-		assertTrue(resultList.contains(fileNotInDatabase));
-		assertFalse(resultList.contains(fileInDatabase));
 	}
 	
 	/**

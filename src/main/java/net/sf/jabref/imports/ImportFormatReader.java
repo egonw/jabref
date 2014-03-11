@@ -20,9 +20,6 @@ import net.sf.jabref.util.Pair;
 import java.util.*;
 
 import net.sf.jabref.*;
-import net.sf.jabref.plugin.PluginCore;
-import net.sf.jabref.plugin.core.JabRefPlugin;
-import net.sf.jabref.plugin.core.generated._JabRefPlugin.ImportFormatExtension;
 
 
 public class ImportFormatReader {
@@ -60,19 +57,6 @@ public class ImportFormatReader {
     formats.add(new MsBibImporter());
     formats.add(new BibtexImporter());
 
-    /**
-     * Get import formats that are plug-ins
-     */
-    JabRefPlugin jabrefPlugin = JabRefPlugin.getInstance(PluginCore.getManager());
-	if (jabrefPlugin != null){
-		for (ImportFormatExtension ext : jabrefPlugin.getImportFormatExtensions()){
-			ImportFormat importFormat = ext.getImportFormat();
-			if (importFormat != null){
-				formats.add(importFormat);
-			}
-		}
-	}
-	
 	/**
 	 * Get custom import formats
 	 */

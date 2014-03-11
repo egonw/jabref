@@ -45,8 +45,6 @@ import net.sf.jabref.imports.ImportMenuItem;
 import net.sf.jabref.imports.OpenDatabaseAction;
 import net.sf.jabref.imports.ParserResult;
 import net.sf.jabref.net.URLDownload;
-import spl.PdfImporter;
-import spl.PdfImporter.ImportPdfFilesResult;
 
 public class EntryTableTransferHandler extends TransferHandler {
 
@@ -373,20 +371,6 @@ public class EntryTableTransferHandler extends TransferHandler {
 			fileNames[i] = file.getAbsolutePath();
 			i++;
 		}
-		// Try to load bib files normally, and import the rest into the current
-		// database.
-		// This process must be spun off into a background thread:
-		new Thread(new Runnable() {
-			public void run() {
-				// Done by MrDlib
-                final ImportPdfFilesResult importRes = new PdfImporter(frame, panel, entryTable, dropRow).importPdfFiles(fileNames, frame);
-                if(importRes.noPdfFiles.length > 0){
-                    loadOrImportFiles(importRes.noPdfFiles, dropRow);
-                }
-                //loadOrImportFiles(fileNames, dropRow);
-                // Done by MrDlib
-			}
-		}).start();
 
 		return true;
 	}

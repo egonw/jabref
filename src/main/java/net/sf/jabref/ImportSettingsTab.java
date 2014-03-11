@@ -21,8 +21,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import spl.gui.ImportDialog;
-
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
@@ -30,8 +28,7 @@ public class ImportSettingsTab extends JPanel implements PrefsTab {
 
 	public final static String PREF_IMPORT_ALWAYSUSE = "importAlwaysUsePDFImportStyle";
 	public final static String PREF_IMPORT_DEFAULT_PDF_IMPORT_STYLE = "importDefaultPDFimportStyle";
-	public final static int DEFAULT_STYLE = ImportDialog.CONTENT; 
-	
+
 	public final static String PREF_IMPORT_FILENAMEPATTERN = "importFileNamePattern"; 
 	public final static String[] DEFAULT_FILENAMEPATTERNS_DISPLAY = new String[] {
             "bibtexkey",
@@ -127,24 +124,6 @@ public class ImportSettingsTab extends JPanel implements PrefsTab {
 		useDefaultPDFImportStyle.setSelected(Globals.prefs.getBoolean(PREF_IMPORT_ALWAYSUSE));
 		int style = Globals.prefs.getInt(PREF_IMPORT_DEFAULT_PDF_IMPORT_STYLE);
 		switch (style) {
-		case ImportDialog.NOMETA:
-			radioButtonNoMeta.setSelected(true);
-			break;
-		case ImportDialog.XMP:
-			radioButtonXmp.setSelected(true);
-			break;
-		case ImportDialog.CONTENT:
-			radioButtonPDFcontent.setSelected(true);
-			break;
-		case ImportDialog.MRDLIB:
-			radioButtonMrDlib.setSelected(true);
-			break;
-		case ImportDialog.ONLYATTACH:
-			radioButtononlyAttachPDF.setSelected(true);
-			break;
-		case ImportDialog.UPDATEEMPTYFIELDS:
-			radioButtonUpdateEmptyFields.setSelected(true);
-			break;
 		default:
 			// fallback
 			radioButtonPDFcontent.setSelected(true);
@@ -155,20 +134,6 @@ public class ImportSettingsTab extends JPanel implements PrefsTab {
 
 	public void storeSettings() {
 		Globals.prefs.putBoolean(PREF_IMPORT_ALWAYSUSE, useDefaultPDFImportStyle.isSelected());
-		int style = DEFAULT_STYLE;
-		if (radioButtonNoMeta.isSelected())
-			style = ImportDialog.NOMETA;
-		else if (radioButtonXmp.isSelected())
-			style = ImportDialog.XMP;
-		else if (radioButtonPDFcontent.isSelected())
-			style = ImportDialog.CONTENT;
-		else if (radioButtonMrDlib.isSelected())
-			style = ImportDialog.MRDLIB;
-		else if (radioButtononlyAttachPDF.isSelected())
-			style = ImportDialog.ONLYATTACH;
-		else if (radioButtonUpdateEmptyFields.isSelected())
-			style = ImportDialog.UPDATEEMPTYFIELDS;
-		Globals.prefs.putInt(PREF_IMPORT_DEFAULT_PDF_IMPORT_STYLE, style);
 		Globals.prefs.put(PREF_IMPORT_FILENAMEPATTERN, fileNamePattern.getText());
 	}
 

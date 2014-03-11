@@ -23,7 +23,6 @@ import net.sf.jabref.export.layout.Layout;
 import net.sf.jabref.export.layout.LayoutHelper;
 import net.sf.jabref.external.PushToApplication;
 import net.sf.jabref.help.HelpAction;
-import net.sf.jabref.plugin.SidePanePlugin;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +42,7 @@ import java.util.prefs.BackingStoreException;
  * argument to the start() method. It displays buttons for testing interaction functions
  * between JabRef and OpenOffice.
  */
-public class OpenOfficePanel extends AbstractWorker implements SidePanePlugin, PushToApplication {
+public class OpenOfficePanel extends AbstractWorker implements PushToApplication {
 
     public static final String defaultAuthorYearStylePath = "/resource/openoffice/default_authoryear.jstyle";
     public static final String defaultNumericalStylePath = "/resource/openoffice/default_numerical.jstyle";

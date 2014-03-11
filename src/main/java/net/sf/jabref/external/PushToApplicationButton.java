@@ -21,9 +21,6 @@ import net.sf.jabref.Globals;
 import net.sf.jabref.JabRefFrame;
 import net.sf.jabref.MnemonicAwareAction;
 import net.sf.jabref.oo.OpenOfficePanel;
-import net.sf.jabref.plugin.PluginCore;
-import net.sf.jabref.plugin.core.JabRefPlugin;
-import net.sf.jabref.plugin.core.generated._JabRefPlugin;
 
 import javax.swing.*;
 import java.awt.*;
@@ -68,24 +65,17 @@ public class PushToApplicationButton implements ActionListener {
 
         applications = new ArrayList<PushToApplication>();
 
-        JabRefPlugin jabrefPlugin = JabRefPlugin.getInstance(PluginCore.getManager());
-        if(jabrefPlugin != null){
-		    List<_JabRefPlugin.PushToApplicationExtension> plugins = jabrefPlugin.getPushToApplicationExtensions();
-		    for (_JabRefPlugin.PushToApplicationExtension extension : plugins) {
-		        applications.add(extension.getPushToApp());
-		    }
-		
-		    applications.add(new PushToLyx());
-		    applications.add(new PushToEmacs());
-		    applications.add(new PushToWinEdt());
-		    applications.add(new PushToLatexEditor());
-		    applications.add(new PushToVim());
-            applications.add(OpenOfficePanel.getInstance());
-            applications.add(new PushToTeXstudio());
+
+        applications.add(new PushToLyx());
+        applications.add(new PushToEmacs());
+        applications.add(new PushToWinEdt());
+        applications.add(new PushToLatexEditor());
+        applications.add(new PushToVim());
+        applications.add(OpenOfficePanel.getInstance());
+        applications.add(new PushToTeXstudio());
 		
 		    // Finally, sort the entries:
 		    //Collections.sort(applications, new PushToApplicationComparator());
-        }
     }
 
 

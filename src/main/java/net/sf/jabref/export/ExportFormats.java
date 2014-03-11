@@ -25,11 +25,6 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 import net.sf.jabref.*;
-import net.sf.jabref.plugin.PluginCore;
-import net.sf.jabref.plugin.core.JabRefPlugin;
-import net.sf.jabref.plugin.core.generated._JabRefPlugin.ExportFormatExtension;
-import net.sf.jabref.plugin.core.generated._JabRefPlugin.ExportFormatProviderExtension;
-import net.sf.jabref.plugin.core.generated._JabRefPlugin.ExportFormatTemplateExtension;
 
 /**
  * User: alver
@@ -81,56 +76,7 @@ public class ExportFormats {
         putFormat(new MSBibExportFormat());
         putFormat(new MySQLExport());
         putFormat(new PostgreSQLExport());
-    
-        // Add Export Formats contributed by Plugins
-        JabRefPlugin plugin = JabRefPlugin.getInstance(PluginCore.getManager());
-		if (plugin != null){
-			
-			// 1. ExportFormats based on Templates
-			for (ExportFormatTemplateExtension e : plugin.getExportFormatTemplateExtensions()){
-				ExportFormat format = PluginBasedExportFormat.getFormat(e);
-				if (format != null){
-					putFormat(format);
-				}
-			}
 
-			// 2. ExportFormat classed 
-			for (final ExportFormatExtension e : plugin.getExportFormatExtensions()) {
-				putFormat(new IExportFormat(){
-
-					public String getConsoleName() {
-						return e.getConsoleName();
-					}
-
-					public String getDisplayName() {
-						return e.getDisplayName();
-					}
-
-					public FileFilter getFileFilter() {
-						return new ExportFileFilter(this, e.getExtension());
-					}
-
-					IExportFormat wrapped;
-					public void performExport(BibtexDatabase database, MetaData metaData,
-						String file, String encoding, Set<String> entryIds)
-						throws Exception {
-
-						if (wrapped == null)
-							wrapped = e.getExportFormat();
-						wrapped.performExport(database, metaData, file, encoding, entryIds);
-					}
-				});
-			}
-		
-			// 3. Formatters provided by Export Format Providers
-			for (ExportFormatProviderExtension e : plugin.getExportFormatProviderExtensions()) {
-				IExportFormatProvider formatProvider = e.getFormatProvider();
-				for (IExportFormat exportFormat : formatProvider.getExportFormats()) {
-					putFormat(exportFormat);
-				}
-			}
-		}
-		
         // Now add custom export formats
         TreeMap<String, ExportFormat> customFormats = Globals.prefs.customExports.getCustomExportFormats();
         for (IExportFormat format : customFormats.values()){
